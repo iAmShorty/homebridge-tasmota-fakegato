@@ -1,0 +1,73 @@
+{
+  "_from": "homebridge-tasmota-fakegato",
+  "_id": "homebridge-tasmota-fakegato@1.0.4",
+  "_inBundle": false,
+  "_location": "/homebridge-tasmota-fakegato",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "homebridge-tasmota-fakegato",
+    "name": "homebridge-tasmota-fakegato",
+    "escapedName": "homebridge-tasmota-fakegato",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": " ",
+  "_spec": "homebridge-tasmota-fakegato",
+  "_where": "/root",
+  "author": {
+    "name": "iAmShorty"
+  },
+  "bugs": {
+    "url": "https://github.com/iAmShorty/homebridge-tasmota-fakegato.git/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "fakegato-history": "^0.5.1",
+    "hap-nodejs-community-types": "git+https://github.com/homespun/hap-nodejs-community-types.git",
+    "node-cache": "^4.2.0",
+    "request": "^2.81.0",
+    "underscore": "^1.9.1"
+  },
+  "deprecated": false,
+  "description": "Control Sonoff devices with Siri and HomeKit",
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^11.1.0",
+    "eslint-loader": "^1.6.1",
+    "eslint-plugin-import": "^1.15.0",
+    "eslint-plugin-jsx-a11y": "^2.2.2",
+    "eslint-plugin-react": "^6.3.0"
+  },
+  "engines": {
+    "homebridge": ">=0.2.0",
+    "node": ">=0.12.0"
+  },
+  "homepage": "https://github.com/iAmShorty/homebridge-tasmota-fakegato.git#readme",
+  "keywords": [
+    "homebridge-plugin",
+    "fakegato",
+    "fakegato-history",
+    "Sonoff",
+		"Tasmota",
+    "Basic",
+    "WiFi",
+    "IoT"
+  ],
+  "license": "Apache License",
+  "main": "index.js",
+  "name": "homebridge-sonoff",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iAmShorty/homebridge-tasmota-fakegato.git"
+  },
+  "scripts": {
+    "lint": "eslint index.js"
+  },
+  "version": "0.0.1"
+}
