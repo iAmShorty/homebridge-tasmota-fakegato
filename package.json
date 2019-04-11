@@ -54,14 +54,20 @@
     "fakegato",
     "fakegato-history",
     "Sonoff",
-		"Tasmota",
+    "Tasmota",
     "Basic",
     "WiFi",
     "IoT"
   ],
-  "license": "Apache License",
+  "license": "Apache-2.0",
+  "licenses": [
+    {
+      "type": "Apache-2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0"
+    }
+	],
   "main": "index.js",
-  "name": "homebridge-sonoff",
+  "name": "homebridge-tasmota-fakegato",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/iAmShorty/homebridge-tasmota-fakegato.git"
