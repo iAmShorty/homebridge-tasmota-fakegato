@@ -65,8 +65,8 @@ function Sonoff(log, config) {
 }
 
 Sonoff.prototype = {
-	_request: function(cmd, callback) {
-		this.log("--------> _request");
+    _request: function(cmd, callback) {
+    //this.log("--------> _request");
     const url = 'http://' + this.hostname + '/cm' + this.auth_url + '&cmnd=' + cmd;
     //this.log('requesting: ' + url);
     request({
@@ -142,7 +142,7 @@ Sonoff.prototype = {
 		*/
 	},
   getInUse: function (callback) {
-    this.log('--------> getInUse');
+    //this.log('--------> getInUse');
     this.getState(function (error, inuse) {
       if (error) {
         callback(error);
@@ -152,7 +152,7 @@ Sonoff.prototype = {
     });
   },
   setState: function (toggle, callback) {
-  	this.log("--------> setState");
+    //this.log("--------> setState");
     var newstate = '%20Off';
     if (toggle) {
       newstate = '%20On';
@@ -175,44 +175,44 @@ Sonoff.prototype = {
         	newstatus = 0;
           callback();
           break;
-      }
-			self.log("--------> update values");
-			const now = moment().unix()
-			const delta = now - self.historyExtra.lastChange
-			const contact = Characteristic.ContactSensorState[newstatus === 0 ? 'CONTACT_DETECTED' : 'CONTACT_NOT_DETECTED']
-			if (self.historyExtra.lastStatus !== contact) {
-				self.historyExtra.lastStatus = contact
-				if (contact == Characteristic.ContactSensorState.CONTACT_NOT_DETECTED) {
-					self.historyExtra.timesOpened++
-					self.historyExtra.closedDuration += delta
-					self.historyExtra.lastActivation = now - self.loggingService.getInitialTime()
-				} else {
-					self.historyExtra.openDuration += delta
-				}
-				self.historyExtra.lastChange = now
-				self.loggingService.setExtraPersistedData(self.historyExtra)
-			}
-		
-			self.contactService.getCharacteristic(Characteristic.ContactSensorState).updateValue(self.historyExtra.lastStatus)
-				.on('change', self.getStatusActive.bind(self));
-			self.contactService.getCharacteristic(Characteristic.TimesOpened).updateValue(self.historyExtra.timesOpened)
-				.on('change', self.getTimesOpened.bind(self));
-			self.contactService.getCharacteristic(Characteristic.ClosedDuration).updateValue(self.historyExtra.closedDuration)
-				.on('change', self.getClosedDuration.bind(self));
-			self.contactService.getCharacteristic(Characteristic.OpenDuration).updateValue(self.historyExtra.openDuration)
-				.on('change', self.getOpenDuration.bind(self));
-			self.contactService.getCharacteristic(Characteristic.LastActivation).updateValue(self.historyExtra.lastActivation)
-				.on('change', self.getLastActivation.bind(self));
-			
-			self.loggingService.addEntry({time: moment().unix(), status: self.historyExtra.lastStatus});
+	}
+	//self.log("--------> update values");
+	const now = moment().unix()
+	const delta = now - self.historyExtra.lastChange
+	const contact = Characteristic.ContactSensorState[newstatus === 0 ? 'CONTACT_DETECTED' : 'CONTACT_NOT_DETECTED']
+	if (self.historyExtra.lastStatus !== contact) {
+		self.historyExtra.lastStatus = contact
+		if (contact == Characteristic.ContactSensorState.CONTACT_NOT_DETECTED) {
+			self.historyExtra.timesOpened++
+			self.historyExtra.closedDuration += delta
+			self.historyExtra.lastActivation = now - self.loggingService.getInitialTime()
+		} else {
+			self.historyExtra.openDuration += delta
+		}
+		self.historyExtra.lastChange = now
+		self.loggingService.setExtraPersistedData(self.historyExtra)
+	}
+
+	self.contactService.getCharacteristic(Characteristic.ContactSensorState).updateValue(self.historyExtra.lastStatus)
+		.on('change', self.getStatusActive.bind(self));
+	self.contactService.getCharacteristic(Characteristic.TimesOpened).updateValue(self.historyExtra.timesOpened)
+		.on('change', self.getTimesOpened.bind(self));
+	self.contactService.getCharacteristic(Characteristic.ClosedDuration).updateValue(self.historyExtra.closedDuration)
+		.on('change', self.getClosedDuration.bind(self));
+	self.contactService.getCharacteristic(Characteristic.OpenDuration).updateValue(self.historyExtra.openDuration)
+		.on('change', self.getOpenDuration.bind(self));
+	self.contactService.getCharacteristic(Characteristic.LastActivation).updateValue(self.historyExtra.lastActivation)
+		.on('change', self.getLastActivation.bind(self));
+
+	self.loggingService.addEntry({time: moment().unix(), status: self.historyExtra.lastStatus});
     });
   },
 	identify: function(callback) {
-		this.log("Identify requested!");
+		//this.log("Identify requested!");
 		callback(); // success
 	},
 	getStatusActive: function (callback) {
-		this.log("--------> getStatusActive");
+		//this.log("--------> getStatusActive");
 		var newobject = JSON.stringify(callback);
 		if (typeof newobject.oldValue !== undefined && newobject.oldValue !== null) {
 			return this.historyExtra.lastStatus;
@@ -221,7 +221,7 @@ Sonoff.prototype = {
 		}
 	},
 	getTimesOpened: function (callback) {
-		this.log("--------> getTimesOpened");
+		//this.log("--------> getTimesOpened");
 		var newobject = JSON.stringify(callback);
 		if (typeof newobject.oldValue !== undefined && newobject.oldValue !== null) {
 			return this.historyExtra.timesOpened;
@@ -232,7 +232,7 @@ Sonoff.prototype = {
 			.on('change', this.getTimesOpened.bind(this));
 	},
 	getClosedDuration: function (callback) {
-		this.log("--------> getClosedDuration");
+		//this.log("--------> getClosedDuration");
 		var newobject = JSON.stringify(callback);
 		if (typeof callback !== undefined && callback !== null) {
 			return this.historyExtra.closedDuration;
@@ -243,7 +243,7 @@ Sonoff.prototype = {
 			.on('change', this.getClosedDuration.bind(this));
 	},
 	getOpenDuration: function (callback) {
-		this.log("--------> getOpenDuration");
+		//this.log("--------> getOpenDuration");
 		var newobject = JSON.stringify(callback);
 		if (typeof newobject.oldValue !== undefined && newobject.oldValue !== null) {
 			return this.historyExtra.openDuration;
@@ -254,7 +254,7 @@ Sonoff.prototype = {
 			.on('change', this.getOpenDuration.bind(this));
 	},
 	getLastActivation: function (callback) {
-		this.log("--------> getLastActivation");
+		//this.log("--------> getLastActivation");
 		var newobject = JSON.stringify(callback);
 		if (typeof newobject.oldValue !== undefined && newobject.oldValue !== null) {
 			return this.historyExtra.lastActivation;
@@ -265,7 +265,7 @@ Sonoff.prototype = {
 			.on('change', this.getLastActivation.bind(this));
 	},
 	getContactSensorState: function (callback) {
-		this.log("--------> getContactSensorState");
+		//this.log("--------> getContactSensorState");
 		var newobject = JSON.stringify(callback);
 		if (typeof newobject.oldValue !== undefined && newobject.oldValue !== null) {
 			return this.historyExtra.lastStatus;
@@ -276,7 +276,7 @@ Sonoff.prototype = {
 			.on('change', self.getStatusActive.bind(this));
 	},
 	getResetTotal: function (callback) {
-		this.log("--------> getResetTotal");
+		//this.log("--------> getResetTotal");
 		var newobject = JSON.stringify(callback);
 		this.loggingService.getCharacteristic(Characteristic.ResetTotal).updateValue(this.historyExtra.lastReset)
 		if (typeof newobject.oldValue !== undefined && newobject.oldValue !== null) {
@@ -286,14 +286,14 @@ Sonoff.prototype = {
 		}
 	},
   setResetTotal: function (value, callback) {
-  	this.log("--------> setResetTotal");
+  	//this.log("--------> setResetTotal");
 		this.historyExtra.lastReset = value
 		this.loggingService.setExtraPersistedData(this.historyExtra)
 		this.loggingService.getCharacteristic(Characteristic.ResetTotal).updateValue(this.historyExtra.lastReset)
 		callback(null)
 	},
 	loadExtra: function () {
-		this.log("--------> loadExtra");
+		//this.log("--------> loadExtra");
 		let extra
 		if (!this.loggingService.isHistoryLoaded()) return setTimeout(this.loadExtra.bind(this), 100)
 		extra = this.loggingService.getExtraPersistedData()
@@ -347,7 +347,7 @@ Sonoff.prototype = {
 			
 		this.loggingService = new FakeGatoHistoryService("door", this, {
 			disableTimer: true,
-			disableRepeatLastData: false,
+			disableRepeatLastData: true,
 			storage: 'fs',
 			length : Math.pow(2, 14),
 			path: _homebridge.user.storagePath()+'/fakegato/',
