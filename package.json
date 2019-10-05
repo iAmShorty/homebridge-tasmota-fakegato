@@ -37,7 +37,7 @@
   "deprecated": false,
   "description": "Control Sonoff devices with Siri and HomeKit",
   "devDependencies": {
-    "eslint": "^3.19.0",
+    "eslint": ">=4.18.2",
     "eslint-config-airbnb": "^11.1.0",
     "eslint-loader": "^1.6.1",
     "eslint-plugin-import": "^1.15.0",
